@@ -7,7 +7,7 @@ One of the steps before using the camera as "eyes" for your robot is to calibrat
 This tool is an easy-to-use that return two things: the camera_matrix and distortion_coefficients matrix. (Why? Take a look [here](http://docs.opencv.org/2.4/doc/tutorials/calib3d/camera_calibration/camera_calibration.html?)  ).
 
 ![alt-tex](https://github.com/dat-ai/webcam-calibration-tool/raw/master/docs/result.JPG)
-### How To Use (Current updating)
+### How To Use (To be Updated)
 --------------
   * Compile the C++ file into executable file.
   * Run command
