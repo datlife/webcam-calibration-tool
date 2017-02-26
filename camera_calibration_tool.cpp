@@ -43,7 +43,7 @@ int main()
 	cv::Size img_size;
 
 	// Get chess board size
-	get_chess_size();
+	//get_chess_size();
 	//Go to image folder to get images for calibration
 	find_corners(arr_obj_points, arr_img_points, img_size);
 
@@ -51,10 +51,9 @@ int main()
 	calibrate_camera(cam_matrix, dist_coeffs, arr_obj_points, arr_img_points, img_size);
 
 	// Save the cam_matrix and distort_coefficient
-	cv::FileStorage file("cam_matrix.ext", cv::FileStorage::WRITE);
-	file << cam_matrix;
-	cv::FileStorage file2("coeff_matrix.ext", cv::FileStorage::WRITE);
-	file2 << dist_coeffs;
+	cv::FileStorage file("calibration_matrix.xml", cv::FileStorage::WRITE);
+	file << "camera_matrix" << cam_matrix << "distortion_coefficients" << dist_coeffs;
+	file.release();
 
 	// Save matrix
 	cv::waitKey(100000);
@@ -145,6 +144,23 @@ std::string get_path(std::string message){
 	return path;
 }
 void 	get_chess_size() {
-	std::cout << "Enter number of rows: ";
-	std::cout << "Enter number of columns: ";
+	int rows, cols;
+	bool good = FALSE;
+	do {
+		std::cout << "Enter number of rows: ";
+		std::cin >> rows;
+		std::cout << "Enter number of columns: ";
+		std::cin >> cols;
+		if (rows > 0 && cols > 0) {
+			good = TRUE;
+			printf("You have selected chess board size has %d rows and %d cols.\n", rows, cols);
+#undef CHESS_ROWS
+#define CHESS_ROWS rows
+#undef CHESS_COLS
+#define CHESS_COLS cols
+		}
+		else {
+			printf("Please only enter possitive numbers.\n");
+		}
+	} while (good == FALSE);
 }
